@@ -1,0 +1,38 @@
+CyberShield SQLite Database
+===========================
+
+Database file:
+data/cybershield.sqlite
+
+Tables:
+- admins
+- users
+- url_scans
+- threat_reports
+- awareness_articles
+
+Sample admin:
+Email: admin@gmail.com
+Password: Admin@12345
+
+Sample users included:
+- Rahul Sharma - rahul.sharma@example.com - active
+- Anjali Patil - anjali.patil@example.com - active
+- Kiran Kumar - kiran.kumar@example.com - suspended
+- Sneha Rao - sneha.rao@example.com - active
+
+Admin Users API:
+GET   /api/admin/users
+PATCH /api/admin/users/:id
+
+When a user signs up or signs in through the CyberShield user login,
+the application synchronizes the Supabase user into the local SQLite
+users table through:
+POST /api/users/sync
+
+To inspect the database:
+1. Open DB Browser for SQLite.
+2. Choose Open Database.
+3. Select data/cybershield.sqlite.
+4. Open the Browse Data tab.
+5. Select users to view the registered-user list.

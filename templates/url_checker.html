@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CyberShield | URL Threat Checker</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">🛡️ CyberShield</div>
+    <div class="nav-title">Cybersecurity Awareness Platform</div>
+</nav>
+
+<main class="main-container">
+
+    <section class="hero">
+
+        <div class="security-badge">
+            🔐 URL SECURITY SCANNER
+        </div>
+
+        <h1>URL Threat Checker</h1>
+
+        <p>
+            Analyze a website URL for common suspicious
+            characteristics and potential security risks.
+        </p>
+
+    </section>
+
+
+    <section class="scanner-card">
+
+        <div class="scanner-heading">
+
+            <div class="scanner-icon">
+                🔗
+            </div>
+
+            <div>
+                <h2>Scan a Website URL</h2>
+
+                <p>
+                    Enter a URL below to perform a security analysis.
+                </p>
+            </div>
+
+        </div>
+
+
+        <form method="POST" action="/url-checker">
+
+            <label for="url">
+                Website URL
+            </label>
+
+            <div class="input-container">
+
+                <span>🌐</span>
+
+                <input
+                    type="text"
+                    id="url"
+                    name="url"
+                    placeholder="https://example.com"
+                    value="{{ request.form.get('url', '') }}"
+                    required
+                >
+
+            </div>
+
+            <button type="submit">
+                🔍 Analyze URL
+            </button>
+
+        </form>
+
+
+        <div class="scanner-note">
+            🔒 Rule-based educational security analysis
+        </div>
+
+    </section>
+
+
+    {% if result %}
+
+    <section class="result-card">
+
+        <div class="result-top">
+
+            <div>
+
+                <div class="result-label">
+                    SCAN RESULT
+                </div>
+
+                {% if result.level == "Safe" %}
+
+                    <h2 class="safe">
+                        🟢 Safe
+                    </h2>
+
+                {% elif result.level == "Suspicious" %}
+
+                    <h2 class="suspicious">
+                        🟡 Suspicious
+                    </h2>
+
+                {% else %}
+
+                    <h2 class="danger">
+                        🔴 High Risk
+                    </h2>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="score">
+
+                <span>Risk Score</span>
+
+                <strong>{{ result.score }}</strong>
+
+                <small>/100</small>
+
+            </div>
+
+        </div>
+
+
+        <div class="scanned-url">
+
+            <span>Scanned URL</span>
+
+            <div>
+                🔗 {{ result.url }}
+            </div>
+
+        </div>
+
+
+        <div class="risk-section">
+
+            <h3>Risk Level</h3>
+
+            <div class="risk-bar">
+
+                <div
+                    class="risk-progress"
+                    style="width: {{ result.score }}%;">
+                </div>
+
+            </div>
+
+            <div class="risk-scale">
+
+                <span>0 - Low Risk</span>
+
+                <span>100 - High Risk</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="indicators">
+
+            <h3>
+                🔎 Detected Indicators
+            </h3>
+
+            {% for reason in result.reasons %}
+
+            <div class="indicator">
+
+                {% if "No obvious" in reason %}
+
+                    <span>✅</span>
+
+                {% else %}
+
+                    <span>⚠️</span>
+
+                {% endif %}
+
+                <p>
+                    {{ reason }}
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="recommendation">
+
+            <h3>
+                💡 Security Recommendation
+            </h3>
+
+            {% if result.level == "Safe" %}
+
+                <p>
+                    No obvious suspicious indicators were detected.
+                    Always verify a website before entering
+                    sensitive information.
+                </p>
+
+            {% elif result.level == "Suspicious" %}
+
+                <p>
+                    This URL contains suspicious characteristics.
+                    Verify the website carefully and avoid entering
+                    passwords or financial information.
+                </p>
+
+            {% else %}
+
+                <p>
+                    This URL contains multiple suspicious
+                    characteristics. Avoid entering sensitive
+                    information and verify the website through
+                    a trusted source.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+    {% endif %}
+
+
+    <section class="how-section">
+
+        <h2>
+            How CyberShield Checks URLs
+        </h2>
+
+        <p>
+            The scanner checks common characteristics
+            associated with suspicious URLs.
+        </p>
+
+
+        <div class="check-grid">
+
+            <div class="check-card">
+
+                <div class="check-icon">
+                    🔒
+                </div>
+
+                <h3>HTTPS Check</h3>
+
+                <p>
+                    Checks whether the website uses
+                    encrypted HTTPS communication.
+                </p>
+
+            </div>
+
+
+            <div class="check-card">
+
+                <div class="check-icon">
+                    🌐
+                </div>
+
+                <h3>IP Address Check</h3>
+
+                <p>
+                    Detects URLs that directly use an
+                    IP address instead of a domain.
+                </p>
+
+            </div>
+
+
+            <div class="check-card">
+
+                <div class="check-icon">
+                    🚨
+                </div>
+
+                <h3>Keyword Check</h3>
+
+                <p>
+                    Detects suspicious words commonly
+                    associated with phishing attempts.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="test-section">
+
+        <h2>🧪 Demo Test URLs</h2>
+
+        <p>
+            Copy these URLs and paste them into the scanner.
+        </p>
+
+
+        <div class="test-grid">
+
+            <div class="test-card safe-test">
+
+                <strong>🟢 Safe</strong>
+
+                <code>
+                    https://example.com
+                </code>
+
+                <p>
+                    Expected: 0/100
+                </p>
+
+            </div>
+
+
+            <div class="test-card suspicious-test">
+
+                <strong>🟡 Suspicious</strong>
+
+                <code>
+                    http://example.com/login
+                </code>
+
+                <p>
+                    Expected: 40/100
+                </p>
+
+            </div>
+
+
+            <div class="test-card danger-test">
+
+                <strong>🔴 High Risk</strong>
+
+                <code>
+                    http://192.168.1.100/login/verify/account/password
+                </code>
+
+                <p>
+                    Expected: 80/100
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="disclaimer">
+
+        ⚠️
+        <strong>Educational Tool:</strong>
+
+        This scanner uses rule-based analysis.
+        It does not guarantee that a website is safe
+        or malicious.
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    🛡️ CyberShield
+    <span>| Cybersecurity Awareness Project</span>
+
+</footer>
+
+</body>
+
+</html>

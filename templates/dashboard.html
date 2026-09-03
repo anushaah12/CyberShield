@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block title %}
+CyberShield | Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+<section class="dashboard">
+
+    <div class="container">
+
+        <!-- HEADER -->
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <div class="badge-custom mb-2">
+                    SECURITY CENTER
+                </div>
+
+                <h1>
+                    CyberShield Dashboard
+                </h1>
+
+                <p>
+                    Choose a security tool below.
+                </p>
+
+            </div>
+
+
+            <div class="security-status">
+
+                <span class="status-dot"></span>
+
+                System Ready
+
+            </div>
+
+        </div>
+
+
+        <!-- SECURITY TOOLS -->
+
+        <div class="row g-4">
+
+
+            <!-- URL -->
+
+            <div class="col-md-6">
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon">
+                        🔗
+                    </div>
+
+                    <h3>
+                        URL Threat Checker
+                    </h3>
+
+                    <p>
+                        Check a website URL for common
+                        suspicious indicators.
+                    </p>
+
+                    <a href="/url-checker"
+                       class="btn btn-primary">
+
+                        Analyze URL →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="col-md-6">
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon">
+                        🔑
+                    </div>
+
+                    <h3>
+                        Password Strength
+                    </h3>
+
+                    <p>
+                        Analyze the strength of a password
+                        without storing it.
+                    </p>
+
+                    <a href="/password-checker"
+                       class="btn btn-primary">
+
+                        Check Password →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- AWARENESS -->
+
+            <div class="col-md-6">
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        Cybersecurity Awareness
+                    </h3>
+
+                    <p>
+                        Learn how to recognize and prevent
+                        common cyber threats.
+                    </p>
+
+                    <a href="/awareness"
+                       class="btn btn-primary">
+
+                        Learn More →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- REPORT -->
+
+            <div class="col-md-6">
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon">
+                        🚨
+                    </div>
+
+                    <h3>
+                        Threat Reporting
+                    </h3>
+
+                    <p>
+                        Report suspicious emails, links,
+                        messages or other cyber incidents.
+                    </p>
+
+                    <a href="/report"
+                       class="btn btn-danger">
+
+                        Report Threat →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- SECURITY TIPS -->
+
+        <div class="security-tip">
+
+            <h4>
+                💡 Security Tip
+            </h4>
+
+            <p>
+                Never share your password or OTP with anyone,
+                and verify suspicious links before opening them.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
